@@ -1,0 +1,59 @@
+
+<div *ngIf="estadoPeticion=='success'" class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong> Actividad creada con exito </strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="estadoPeticion=='error'" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> Algo a salido mal </strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form #ActividadForm="ngForm" (ngSubmit)="onSubmit(ActividadForm)">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="titulo">Titulo</label>
+      <input type="text" class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="actividad.titulo">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Area Actividad</label>
+      <select class="form-control" #area="ngModel" [(ngModel)]="actividad.fk_area_actividad" name="area">
+        <option value="">selecciona</option>
+        <option [value]="area.id_area_actividad" *ngFor="let area of areasSelect">{{area.nombre_area}}</option>
+      </select> </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="archivo">Archivo</label>
+      <angular-file-uploader
+
+         [config]="afuConfig"
+         (ApiResponse)="SubirArchivo($event)"
+         >
+     
+
+      </angular-file-uploader>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="">Usuario Encargado</label>
+      <select name="users" class="form-control" name="encargado" #encargado="ngModel"
+        [(ngModel)]="actividad.fk_user_encargado">
+        <option value="">selecciona</option>
+        <option [value]="user.id" *ngFor="let user of userSelect">{{user.nombre}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="descripcion">Descripcion </label>
+    <textarea class="form-control" rows="3" name="descripcion" #descripcion="ngModel"
+      [(ngModel)]="actividad.descripcion"></textarea>
+  </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary">Agragar</button>
+</form>
