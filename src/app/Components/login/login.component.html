@@ -1,0 +1,74 @@
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="../../index2.html"><b>Cargas</b>Laborales</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Ingresa para iniciar sesion</p>
+        <br>
+        <small *ngIf="!password.valid && password.touched" class="inavalid-feedback d-block">
+          La contraseña no es valido
+        </small>
+        <small *ngIf="!correo.valid && correo.touched" class="inavalid-feedback d-block">
+          El email no es valido
+        </small>
+
+
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="input-group mb-3">
+            <input type="email" name="correo" class="form-control" placeholder="correo" #correo="ngModel"
+              [(ngModel)]="user.correo" required>
+              <hr>
+            
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password" #password="ngModel"
+              [(ngModel)]="user.password" required>
+              <hr>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Recuerdame
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <input type="submit" value="Login" class="btn btn-success"[disabled]="loginForm.invalid" >
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <div class="social-auth-links text-center mb-3">
+
+        </div>
+        <!-- /.social-auth-links -->
+
+        <!-- <p class="mb-1">
+          <a href="forgot-password.html">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+          <a href="register.html" class="text-center">Register a new membership</a>
+        </p> -->
+
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</div>

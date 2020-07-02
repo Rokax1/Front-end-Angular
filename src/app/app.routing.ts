@@ -1,24 +1,23 @@
 //importar los modulos del router de angular 
 import {ModuleWithProviders} from '@angular/core';
 import {Routes,RouterModule} from '@angular/router';
+import {NoAuthGuard} from './services/Guards/noAuthGuard';
 
 //componentes que se van a ocupar 
-import {UsersComponent} from './Components/users/users.component';
-import {ActividadesComponent} from './Components/ActividadesComponents/actividades/actividades.component';
-import {AgregarActividadComponent} from './Components/ActividadesComponents/agregar-actividad/agregar-actividad.component';
-import {AreaActividadesComponent} from './Components/area-actividades/area-actividades.component';
-import {HomeComponent} from './Components/home/home.component';
+import {UsersComponent} from './Dashboard/users/users.component';
+import {ActividadesComponent} from './Dashboard/ActividadComponents/actividades/actividades.component';
+import {AgregarActividadComponent} from './Dashboard/ActividadComponents/agregar-actividad/agregar-actividad.component';
+import {AreaActividadesComponent} from './Dashboard/AreaComponents/area-actividades/area-actividades.component';
+import {HomeComponent} from './Dashboard/home/home.component';
 import {ErrorComponent} from './Components/error/error.component';
-import {ActividadPdfComponent} from './Components/ActividadesComponents/actividad-pdf/actividad-pdf.component';
+import {ActividadPdfComponent} from './Dashboard/ActividadComponents/actividad-pdf/actividad-pdf.component';
+import {LoginComponent} from './Components/login/login.component';
+
+//import {DashboardComponent} from './Components/Estructura/dashboard/dashboard.component';
 
 const appRoutes:Routes=[
-    {path:'',component:HomeComponent},
-    {path:'Home',component:HomeComponent},
-    {path:'Users',component:UsersComponent},
-    {path:'Actividades',component:ActividadesComponent},
-    {path:'AreaActividades',component:AreaActividadesComponent},
-    {path:'Actividades/Crear',component:AgregarActividadComponent},
-    {path:'Actividades/Pdf/:filename',component:ActividadPdfComponent},
+
+    {path:'',canActivate:[NoAuthGuard], component:LoginComponent},
     {path:'**',component:ErrorComponent}
 
     

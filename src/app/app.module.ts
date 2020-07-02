@@ -1,50 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import {routing ,appRoutesProviders} from './app.routing';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/Estructura/header/header.component';
-import { SidebarComponent } from './Components/Estructura/sidebar/sidebar.component';
-import { FooterComponent } from './Components/Estructura/footer/footer.component';
-import { UsersComponent } from './Components/users/users.component';
-import { ActividadesComponent } from './Components/ActividadesComponents/actividades/actividades.component';
-import { AreaActividadesComponent } from './Components/area-actividades/area-actividades.component';
-import { HomeComponent } from './Components/home/home.component';
-import { ErrorComponent } from './Components/error/error.component';
-import { ActividadComponent } from './Components/ActividadesComponents/actividad/actividad.component';
-import { AgregarActividadComponent } from './Components/ActividadesComponents/agregar-actividad/agregar-actividad.component';
-import { AngularFileUploaderModule } from "angular-file-uploader";
+import {DasboardModule} from './Dashboard/dashboard.module';
+import {NoAuthGuard} from './services/Guards/noAuthGuard';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
-import { ActividadPdfComponent } from './Components/ActividadesComponents/actividad-pdf/actividad-pdf.component';
-import { LoginComponent } from './Components/Estructura/login/login.component';
+import {MomentModule} from 'angular2-moment';
+
+
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './Components/login/login.component';
+import { UserServices } from './services/users.services';
+import { AreaFormComponent } from './Dashboard/AreaComponents/area-form/area-form.component';
+import { VerActividadComponent } from './Dashboard/ActividadComponents/ver-actividad/ver-actividad.component';
+//import { EditarActividadComponent } from './Dashboard/ActividadComponents/editar-actividad/editar-actividad.component';
+
+//import { DashboardComponent } from './Components/Estructura/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    FooterComponent,
-    UsersComponent,
-    ActividadesComponent,
-    AreaActividadesComponent,
-    HomeComponent,
-    ErrorComponent,
-    ActividadComponent,
-    AgregarActividadComponent,
-    ActividadPdfComponent,
-    LoginComponent
+    LoginComponent,
+    AreaFormComponent,
+    VerActividadComponent,
+    //EditarActividadComponent,
+   // DashboardComponent
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
     HttpClientModule,
-    AngularFileUploaderModule,
-    PdfViewerModule
+    DasboardModule,
+    PdfViewerModule,
+    MomentModule
+   
   ],
-  providers: [appRoutesProviders],
+  providers: [
+    appRoutesProviders,
+    NoAuthGuard,
+    UserServices
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

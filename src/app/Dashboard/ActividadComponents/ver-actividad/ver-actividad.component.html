@@ -1,0 +1,135 @@
+<div class="col-md-12">
+  <!-- Box Comment -->
+  <div class="card card-widget">
+    <div class="card-header">
+      <div class="user-block">
+        <span class="username"><a href="#">{{ actividad.titulo }} </a></span>
+        <span class="description" *ngIf="actividad.user_encargado == undefined ; else elseBlock">Empleado Encargado:
+          <strong>...</strong> </span>
+        <ng-template #elseBlock>
+          <span class="description">Empleado Encargado: <strong>
+              {{actividad.user_encargado[0].nombre +" " +actividad.user_encargado[0].apellido }}</strong> </span>
+        </ng-template>
+      </div>
+      <!-- /.user-block -->
+      <div class="card-tools">
+
+      </div>
+
+      <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <!-- post text -->
+
+      <p>{{actividad.descripcion}}</p>
+
+
+      <!-- Attachment -->
+      <div class="attachment-block clearfix">
+
+        <div class="attachment-pushed">
+          <h4 class="attachment-heading"> <a class="" [routerLink]="['Pdf/',actividad.archivo]"
+              target="_blank">{{actividad.archivo}}</a></h4>
+
+          <div class="attachment-text">
+            Click en el enlace para tener mas informacion....
+          </div>
+          <!-- /.attachment-text -->
+        </div>
+        <!-- /.attachment-pushed -->
+      </div>
+      <!-- /.attachment-block -->
+
+      <!-- Social sharing buttons -->
+      <a class="btn btn-default btn-sm" href="#" type="button">Editar</a>
+      <a class="btn btn-default btn-sm" href="#" type="button">Borrar</a>&nbsp;
+      <span class="float-right text-muted"></span>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer card-comments">
+
+      <!-- tarjeta de chat  -->
+      <div class="card card-prirary cardutline direct-chat direct-chat-primary">
+        <div class="card-header">
+          <h3 class="card-title"> Chat de la actividad</h3>
+
+          <div class="card-tools">
+            <span data-toggle="tooltip" title="3 New Messages" class="badge bg-primary">3</span>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <div class="loader" *ngIf="!msjs">
+            
+          </div>
+          <!-- contenedor de los mensajes -->
+          <div class="direct-chat-messages"  >
+
+            <div *ngFor="let msj of msjs">
+
+            <!-- mensaje del encargado -->
+            <div class="direct-chat-msg" *ngIf="msj.fk_user != identity.sub ; else elseBlock">
+              <div class="direct-chat-infos clearfix">
+                <span class="direct-chat-name float-left"> {{actividad.user_encargado[0].nombre}}</span>
+                <span class="direct-chat-timestamp float-right">{{ msj.created_at | amLocale:'es' | amTimeAgo }}</span>
+              </div>
+              <!-- /.direct-chat-infos -->
+              <!-- /.direct-chat-img -->
+              <div class="direct-chat-text" >
+              {{msj.descripcion_mensaje}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+
+
+            <!-- mensaje del creador  -->
+           <ng-template #elseBlock>
+             <div class="direct-chat-msg right">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-right"> {{identity.name}}</span>
+                  <span class="direct-chat-timestamp float-left">{{ msj.created_at | amLocale:'es' | amTimeAgo }}</span>
+                </div>
+                <!-- /.direct-chat-infos -->
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  {{msj.descripcion_mensaje}}
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+           </ng-template>
+           
+              
+           
+            </div>
+
+
+          </div>
+
+          <!--/.direct-chat-messages-->
+
+          <!-- Contacts are loaded here -->
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <form action="#" method="post">
+            <div class="input-group">
+              <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+              <span class="input-group-append">
+                <button type="submit" class="btn btn-primary">Send</button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card-comment -->
+    </div>
+
+  </div>
+  <!-- /.card -->
+</div>

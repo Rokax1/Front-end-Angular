@@ -1,0 +1,78 @@
+
+<div class="card card-widget"  >
+  <div class="card-header">
+    <div class="user-block">
+      <span class="username"> {{actividad.id_actividad}}<a href="#"> {{actividad.titulo}} </a></span>
+      <span class="description" *ngIf="actividad.user_encargado == '' ; else elseBlock">Empleado Encargado: <strong>...</strong> </span>
+      <ng-template #elseBlock>
+        <span class="description" >Empleado Encargado: <strong> {{actividad.user_encargado[0].nombre +" " +actividad.user_encargado[0].apellido }}</strong> </span>
+      </ng-template>
+    </div>
+    <!-- /.user-block -->
+    
+    <!-- /.card-tools -->
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <!-- post text -->
+    <p>{{actividad.descripcion}}</p>
+
+    
+
+    <!-- Attachment -->
+    <div class="attachment-block clearfix">
+
+      <div class="attachment-pushed">
+        <h4 class="attachment-heading"> <a class="" 
+        [routerLink]="['Pdf/',actividad.archivo]"   
+        target="_blank">{{actividad.archivo}}</a></h4>
+
+        <div class="attachment-text">
+          Click en el enlace para tener mas informacion.... 
+        </div>
+        <!-- /.attachment-text -->
+      </div>
+      <!-- /.attachment-pushed -->
+    </div>
+    <!-- /.attachment-block -->
+
+    <!-- Social sharing buttons -->
+    <a class="btn btn-default btn-sm" [routerLink]="['Ver/',actividad.id_actividad  ]"  type="button">Ver</a>
+    <a class="btn btn-default btn-sm" [routerLink]="['Editar/',actividad.id_actividad  ]" type="button">Editar</a>
+    <a  class="btn btn-default btn-sm" data-toggle="modal" [attr.data-target]="'#modal-danger'+actividad.id_actividad">
+      borrar
+    </a>
+    <span class="float-right text-muted">{{actividad.estado_actividad}}</span>
+
+    <span class="float-right text-muted"></span>
+  </div>
+  <!-- /.card-body -->
+  <div class="modal fade" id="{{'modal-danger'+actividad.id_actividad}}" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content bg-danger">
+        <div class="modal-header">
+          <h4 class="modal-title">¿Eliminar?</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Seguro que quieres eliminar la actividad N° {{actividad.id_actividad +""}} ?  </p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-outline-light" data-dismiss="modal">cerrar</button>
+          <a class="btn btn-outline-light" data-dismiss="modal" (click)="borrar(actividad.id_actividad)"  type="button">Borrar</a>&nbsp;
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.card-footer -->
+  
+  <!-- /.card-footer -->
+</div>
+
+<ng-template #elseBlock>
+  
+</ng-template>

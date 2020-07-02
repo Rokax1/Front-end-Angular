@@ -1,0 +1,29 @@
+<div class="table-responsive-sm">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">nombre</th>
+      <th scope="col">descripcion</th>
+      <th scope="col">Acciones</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let area of areas">
+      <td>{{area.id_area_actividad}}</td>
+      <td>{{area.nombre_area}}</td>
+      <td>{{area.descripcion}}</td>
+      <td>
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <!-- <a class="btn btn-success" href="#" type="button">Ver</a> -->
+            <a class="btn btn-info" href="#" type="button">Editar</a>
+            <a class="btn btn-danger" (click)="eliminar(area.id_area_actividad)" type="button">Borrar</a>&nbsp;
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

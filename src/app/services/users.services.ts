@@ -20,7 +20,7 @@ export class UserServices {
 
 
 
-    register(user): Observable<any> {
+    registrar(user): Observable<any> {
         let json = JSON.stringify(user);
         let params = 'json=' + json;
 
@@ -29,7 +29,7 @@ export class UserServices {
         return this._http.post(this.url + 'Register', params, { headers: headers });
     }
 
-    signUp(user, gettoken = null): Observable<any> {
+    Login(user, gettoken = null): Observable<any> {
         if (gettoken != null) {
             user.gettoken = 'true';
         }

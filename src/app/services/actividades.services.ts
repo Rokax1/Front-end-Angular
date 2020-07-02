@@ -19,8 +19,10 @@ export class ActividadService{
     }
 
 
-    getActividades():Observable<any>{
-        return this._http.get(this.url+"Actividades");
+    getActividades(token):Observable<any>{
+        let headers= new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded')
+                                      .set('Authorization',token);
+        return this._http.get(this.url+"Actividades",{headers:headers});
     }
 
     AgregarActividad(actividad,token):Observable<any>{
@@ -34,6 +36,35 @@ export class ActividadService{
         return this._http.post(this.url+'Actividades',params,{headers:headers});
 
 
+    }
+    showActividad(id):Observable<any>{
+
+
+        let headers= new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded')
+                                     
+
+        return this._http.get(this.url+'Actividades/'+id,{headers:headers});
+
+
+    }
+
+    deleteActividad(id,token):Observable<any>{
+
+
+        let headers= new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded')
+                                        .set('Authorization',token);
+
+        return this._http.delete(this.url+'Actividades/'+id,{headers:headers});
+
+
+    }
+
+    EditActividad(id,token){
+        let headers= new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded')
+                                        .set('Authorization',token);
+
+        
+         return this._http.put(this.url+'Actividades/'+id,{headers:headers});
     }
 
     getPdf(pdf,token):Observable<any>{
